@@ -121,12 +121,11 @@ def process_large_number(words: list):
         if words[idx - 1] in hundreds_words:
             words[idx] = 'không'
 
-    try:
-        words.index('lẽ')
-    except ValueError:
-        return process_large_number_normal(words)
+    if "lẽ" in words:
+        return process_large_number_special(words)
 
-    return process_large_number_special(words)
+    return process_large_number_normal(words)
+
 
 
 if __name__ == '__main__':
