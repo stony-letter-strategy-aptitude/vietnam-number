@@ -45,10 +45,12 @@ class NumbersOfHundreds(Numbers):
                 vd: bốn trăm trăm bảy mươi hai, bốn trăm bảy mươi mươi hai
 
         """
-        for hundreds, tens in zip(hundreds_words, tens_words):
+        if any(self.words_number_counter[hundreds] > 1 for hundreds in hundreds_words):
+            raise ValueError(
+                "Chữ số hàng trăm nhiều hơn 1 từ. Vui lòng nhập chữ số hợp lệ."
+            )
 
-            if self.words_number.count(hundreds) > 1:
-                raise ValueError('Chữ số hàng trăm nhiều hơn 1 từ. Vui lòng nhập chữ số hợp lệ.')
-
-            if self.words_number.count(tens) > 1:
-                raise ValueError('Chữ số hàng mười nhiều hơn 1 từ. Vui lòng nhập chữ số hợp lệ.')
+        if any(self.words_number_counter[tens] > 1 for tens in tens_words):
+            raise ValueError(
+                "Chữ số hàng mười nhiều hơn 1 từ. Vui lòng nhập chữ số hợp lệ."
+            )
