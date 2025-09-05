@@ -1,5 +1,7 @@
-from functools import cached_property
+from collections import Counter
 from collections.abc import Generator
+from functools import cached_property
+
 from vietnam_number.word2number.data import (
     billion_words,
     hundreds_words,
@@ -32,6 +34,7 @@ class Numbers(object):
             words_number (list): Danh sách chữ số đầu vào.
         """
         self.words_number = words_number
+        self.words_number_counter = Counter(words_number)
 
     @cached_property
     def get_keyword_index(self):
