@@ -20,8 +20,14 @@ billion_words = frozenset(("tỷ", "tỏi", "tỉ"))
 million_words = frozenset(("triệu", "củ", "chai"))
 thousand_words = frozenset(("nghìn", "nghàn", "ngàn"))
 
+billion_million_thousand_words = frozenset().union(
+    billion_words, million_words, thousand_words
+)
+
 hundreds_words = frozenset(("trăm", "lít"))
 tens_words = frozenset(("mươi", "chục"))
+
+hundreds_tens_words = frozenset().union(hundreds_words, tens_words)
 
 tens_special = ("mười",)
 special_word = frozenset(("lẽ", "linh", "lẻ"))
