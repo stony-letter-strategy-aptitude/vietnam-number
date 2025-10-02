@@ -1,5 +1,6 @@
 from collections import Counter
 from dataclasses import dataclass, field
+from string import punctuation
 
 from vietnam_number.word2number.data import (
     ALLOW_WORDS,
@@ -7,6 +8,8 @@ from vietnam_number.word2number.data import (
     TENS_SPECIAL,
     WORD_TO_KEYWORD,
 )
+
+TABLE = str.maketrans(punctuation, " " * len(punctuation))
 
 
 @dataclass(repr=False, eq=False)
@@ -77,7 +80,7 @@ def pre_process_w2n(words: str):
 
     """
     split_words = (
-        words.replace("-", " ")  # replace ký tự đặt biệt "-" sang khoản trắng
+        words.translate(TABLE)  # replace ký tự đặt biệt punctuation sang khoản trắng
         .lower()  # converting chuổi đầu vào thành chuổi viết thường
         .split()  # xóa khoảng trắng thừa và chia câu thành các từ
     )
@@ -87,6 +90,6 @@ def pre_process_w2n(words: str):
 
     # Thông báo lỗi nếu người dùng nhập đầu vào không hợp lệ!
     if not clean_numbers:
-        raise ValueError('không có chử số hợp lệ! vui lòng nhập chữ số hợp lệ.')
+        raise ValueError("không có chử số hợp lệ! vui lòng nhập chữ số hợp lệ.")
 
     return clean_numbers
