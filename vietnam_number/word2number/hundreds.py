@@ -73,19 +73,17 @@ def process_hundreds(words: list) -> str:
             # Lấy giá trị của phần chục.
             value_of_tens = clean_words_number[tens_index - 1 : tens_index + 2]
 
-            # Lấy giá trị của phần còn lại.
-            remaining = (
-                clean_words_number[tens_index + 2 :]
-                or clean_words_number[: tens_index - 1]
-            )[0]
-
             # Trường hợp đặc biệt như ['bốn', 'mươi', 'hai', 'ba'] == 423
             if tens_index == 1:
-                return process_tens(value_of_tens) + process_units(remaining)
+                return process_tens(value_of_tens) + process_units(
+                    clean_words_number[-1]
+                )
 
             # Trường hợp đặc biệt như ['ba', 'bốn', 'mươi', 'hai'] == 342
             elif tens_index == 2:
-                return process_units(remaining) + process_tens(value_of_tens)
+                return process_units(clean_words_number[0]) + process_tens(
+                    value_of_tens
+                )
             else:
                 raise ValueError("Định dạng chữ số không hợp lệ.")
 
