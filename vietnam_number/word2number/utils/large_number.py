@@ -2,7 +2,6 @@ from vietnam_number.word2number.data import (
     BILLION_MILLION_THOUSAND_WORDS,
     BILLION_WORDS,
     MILLION_WORDS,
-    THOUSAND_WORDS,
     UNITS,
 )
 from vietnam_number.word2number.utils.base import Numbers
@@ -41,8 +40,9 @@ class LargeNumber(Numbers):
                 number_for_format.append('trăm')
                 number_for_format.append('nghìn')
 
-            elif second_last_word in THOUSAND_WORDS:
-                number_for_format.append('trăm')
+            # case second_last_word in THOUSAND_WORDS
+            else:
+                number_for_format.append("trăm")
 
         return cls(number_for_format)
 
