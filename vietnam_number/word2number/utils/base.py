@@ -3,9 +3,9 @@ from dataclasses import dataclass, field
 from string import punctuation
 
 from vietnam_number.word2number.data import (
+    ALLOW_WORDS_EXCLUDING_TENS_SPECIAL,
     TENS_SPECIAL,
     WORD_TO_KEYWORD,
-    ALLOW_WORDS_EXCLUDING_TENS_SPECIAL,
 )
 
 PUNCTUATION_TO_SPACE_TABLE = str.maketrans(punctuation, " " * len(punctuation))
@@ -23,16 +23,8 @@ class Numbers:
 
     def __post_init__(self) -> None:
         self.words_number_counter = Counter(self.words_number)
-        self.keyword_index = self.get_keyword_index()
 
-    def get_keyword_index(self) -> dict[str, int]:
-        """Lấy vị trí index của các từ khóa như mười, trăm, nghìn, triệu, tỷ.
-
-        Returns:
-            Trả về một dic gồm các keyword và vị trí index của nó.
-
-        """
-        return {
+        self.keyword_index: dict[str, int] = {
             keyword: index_position
             for index_position, word in enumerate(self.words_number)
             if (keyword := WORD_TO_KEYWORD.get(word))
