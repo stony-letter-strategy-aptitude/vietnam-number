@@ -2,7 +2,6 @@ from vietnam_number.word2number.data import (
     BILLION_MILLION_THOUSAND_WORDS,
     BILLION_WORDS,
     MILLION_WORDS,
-    THOUSAND_WORDS,
     UNITS,
 )
 from vietnam_number.word2number.utils.base import Numbers
@@ -41,24 +40,27 @@ class LargeNumber(Numbers):
                 number_for_format.append('trăm')
                 number_for_format.append('nghìn')
 
-            elif second_last_word in THOUSAND_WORDS:
-                number_for_format.append('trăm')
+            # case second_last_word in THOUSAND_WORDS
+            else:
+                number_for_format.append("trăm")
 
         return cls(number_for_format)
 
-    def validate(self):
+    def validate(
+        self,
+        billion_million_thousand_words: frozenset[str] = BILLION_MILLION_THOUSAND_WORDS,
+    ):
         """Kiểm tra tính hợp lệ của danh sách chữ số đầu vào.
 
         Raises:
             ValueError: Nếu danh sách chữ số đầu váo có nhiều hợn 1 từ thuộc các từ trong
-                hundreds_words và tens_words thì báo lỗi.
+                BILLION_MILLION_THOUSAND_WORDS thì báo lỗi.
                 vd: bốn trăm trăm bảy mươi hai, bốn trăm bảy mươi mươi hai
 
         """
         # Lỗi nếu người dùng nhập hai lần chữ triệu, tỷ, nghìn
-        words_number_counter = self.words_number_counter
-        for word in BILLION_MILLION_THOUSAND_WORDS:
-            if words_number_counter[word] > 1:
+        for word, count in self.words_number_counter.items():
+            if count > 1 and word in billion_million_thousand_words:
                 raise ValueError(
                     f"Chữ số {word} nhiều hơn 1 từ. Vui lòng nhập chữ số hợp lệ."
                 )
