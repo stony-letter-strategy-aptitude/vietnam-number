@@ -46,18 +46,13 @@ def process_large_number_normal(words: list):
     # Xữ lý chữ số hàng trăm.
     clean_words_number = large_number.words_number
 
-    # Lấy vị trí index của từ khóa hàng chục
-    billion_index = large_number.keyword_index.get("billion_index")
-    million_index = large_number.keyword_index.get("million_index")
-    thousand_index = large_number.keyword_index.get("thousand_index")
-
     start: int = 0
     number_segments: list[list[str]] = []
 
-    for index in (
-        billion_index,
-        million_index,
-        thousand_index,
+    for index in (  # Lấy vị trí index của từ khóa hàng chục
+        large_number.keyword_index.get("billion_index"),
+        large_number.keyword_index.get("million_index"),
+        large_number.keyword_index.get("thousand_index"),
     ):
         if index is None:
             number_segments.append(())
