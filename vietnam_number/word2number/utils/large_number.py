@@ -33,12 +33,10 @@ class LargeNumber(Numbers):
                 pass
 
             elif second_last_word in BILLION_WORDS:
-                number_for_format.append('trăm')
-                number_for_format.append('triệu')
+                number_for_format.extend(("trăm", "triệu"))
 
             elif second_last_word in MILLION_WORDS:
-                number_for_format.append('trăm')
-                number_for_format.append('nghìn')
+                number_for_format.extend(("trăm", "nghìn"))
 
             # case second_last_word in THOUSAND_WORDS
             else:
