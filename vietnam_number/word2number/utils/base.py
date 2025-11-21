@@ -45,8 +45,7 @@ def convert_to_tens_word(words: list[str]) -> list[str]:
         if word in ALLOW_WORDS_EXCLUDING_TENS_SPECIAL:
             new_words.append(word)
         elif word in TENS_SPECIAL:
-            new_words.append("một")
-            new_words.append("mươi")
+            new_words.extend(("một", "mươi"))
     return new_words
 
 
