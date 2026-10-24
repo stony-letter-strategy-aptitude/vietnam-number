@@ -1,13 +1,14 @@
+from vietnam_number.number2word.data import ZeroWord
 from vietnam_number.number2word.large_number import n2w_large_number
 from vietnam_number.number2word.single import process_n2w_single
 from vietnam_number.number2word.utils.base import pre_process_n2w
 
 
-def n2w(number: str):
+def n2w(number: str, *, zero_word: ZeroWord = ZeroWord.LE):
     # Tiền xữ lý dữ liệu chuỗi số đầu vào
     clean_number = pre_process_n2w(number)
 
-    return n2w_large_number(clean_number)
+    return n2w_large_number(clean_number, zero_word=zero_word)
 
 
 def n2w_single(number: str):
