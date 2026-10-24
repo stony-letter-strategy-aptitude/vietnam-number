@@ -86,11 +86,9 @@ def n2w_large_number(numbers: str, *, zero_word: ZeroWord):
     return " ".join(total_number)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    numbers = ("4680000000", "2460125030000", "1000000000000000000")
 
-    number = '4680000000'
-    print(n2w_large_number(number))
-    number = '2460125030000'
-    print(n2w_large_number(number))
-    number = '1000000000000000000'
-    print(n2w_large_number(number))
+    for number in numbers:
+        print(n2w_large_number(number, zero_word=ZeroWord.LE))
+        print(n2w_large_number(number, zero_word=ZeroWord.LINH))
