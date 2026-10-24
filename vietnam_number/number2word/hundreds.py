@@ -136,25 +136,9 @@ def n2w_hundreds(numbers: str, *, zero_word: ZeroWord):
     return (digits_hundred + digit_tens + digit_unit).rstrip()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    numbers = ("111", "200", "101", "121", "815", "805", "825")
 
-    number = '111'
-    print(n2w_hundreds(number))
-
-    number = '200'
-    print(n2w_hundreds(number))
-
-    number = '101'
-    print(n2w_hundreds(number))
-
-    number = '121'
-    print(n2w_hundreds(number))
-
-    number = '815'
-    print(n2w_hundreds(number))
-
-    number = '805'
-    print(n2w_hundreds(number))
-
-    number = '825'
-    print(n2w_hundreds(number))
+    for number in numbers:
+        print(n2w_hundreds(number, zero_word=ZeroWord.LE))
+        print(n2w_hundreds(number, zero_word=ZeroWord.LINH))
